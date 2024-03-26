@@ -1,0 +1,133 @@
+import React, { useState } from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from '@mui/material';
+import TagListItem from '../TagListItem';
+import useTags from '../../hooks/useTags';
+
+const TagList = () => {
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(30);
+  const [sortField, setSortField] = useState('popular');
+  const [sortOrder, setSortOrder] = useState('desc');
+
+  const {
+    data: tagsData,
+    isLoading,
+    error,
+  } = useTags(page, pageSize, sortField, sortOrder);
+
+  const handlePageSizeChange = (event) => {
+    setPageSize(event.target.value);
+    setPage(1);
+  };
+
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  const handleSortFieldChange = (event) => {
+    setSortField(event.target.value);
+  };
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) {
+    return (
+      <div>
+        Error: {error.message}
+        <br />
+        <Button onClick={() => setPage((prev) => prev)}>Retry</Button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+        <InputLabel>Page Size</InputLabel>
+        <Select
+          value={pageSize}
+          onChange={handlePageSizeChange}
+          label="Page Size"
+        >
+          {[10, 20, 30, 40, 50].map((size) => (
+            <MenuItem key={size} value={size}>
+              {size}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+        <InputLabel>Sort Order</InputLabel>
+        <Select
+          value={sortOrder}
+          onChange={handleSortOrderChange}
+          label="Sort Order"
+        >
+          <MenuItem value="desc">Descending</MenuItem>
+          <MenuItem value="asc">Ascending</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+        <InputLabel>Sort Field</InputLabel>
+        <Select
+          value={sortField}
+          onChange={handleSortFieldChange}
+          label="Sort Field"
+        >
+          <MenuItem value="popular">Popularity</MenuItem>
+          <MenuItem value="name">Name</MenuItem>
+        </Select>
+      </FormControl>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Tag Name</TableCell>
+              <TableCell align="right">Post Count</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tagsData?.items.map((tag) => (
+              <TagListItem key={tag.name} tag={tag} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <div
+        style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
+      >
+        <Button
+          onClick={handlePrevPage}
+          disabled={page === 1}
+          style={{ marginRight: '10px' }}
+        >
+          Previous
+        </Button>
+        <Button onClick={handleNextPage}>Next</Button>
+      </div>
+    </div>
+  );
+};
+
+export default TagList;
