@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StyledTagListContainer } from './TagList.styled';
 import {
   Table,
   TableBody,
@@ -61,8 +62,8 @@ const TagList = () => {
   }
 
   return (
-    <div>
-      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+    <StyledTagListContainer>
+      <FormControl variant="outlined" size="small" style={{ margin: '15px' }}>
         <InputLabel>Page Size</InputLabel>
         <Select
           value={pageSize}
@@ -126,7 +127,7 @@ const TagList = () => {
         </Button>
         <Button onClick={handleNextPage}>Next</Button>
       </div>
-    </div>
+    </StyledTagListContainer>
   );
 };
 

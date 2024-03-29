@@ -11,8 +11,15 @@ const useTags = (page, pageSize, sortField = 'popular', sortOrder = 'desc') => {
       setIsLoading(true);
       setError(null);
       try {
+        let sortParam = 'popular';
+        if (sortField === 'name') {
+          sortParam = 'name';
+        }
+
+        const orderParam = sortOrder;
+
         const result = await axios.get(
-          `https://api.stackexchange.com/2.2/tags?site=stackoverflow&order=desc&sort=popular&page=${page}&pagesize=${pageSize}&key=Qapmp7A0C9E4csyqdryPaw((`
+          `https://api.stackexchange.com/2.2/tags?site=stackoverflow&order=${orderParam}&sort=${sortParam}&page=${page}&pagesize=${pageSize}&key=Qapmp7A0C9E4csyqdryPaw((`
         );
 
         setData(result.data);
