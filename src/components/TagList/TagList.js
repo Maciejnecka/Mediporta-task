@@ -13,6 +13,12 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
 import TagListItem from '../TagListItem';
 import useTags from '../../hooks/useTags';
@@ -50,14 +56,47 @@ const TagList = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   if (error) {
     return (
-      <div>
-        Error: {error.message}
-        <br />
-        <Button onClick={() => setPage((prev) => prev)}>Retry</Button>
-      </div>
+      <Dialog
+        open={Boolean(error)}
+        onClose={() => setPage((prev) => prev)}
+        aria-labelledby="error-dialog-title"
+        aria-describedby="error-dialog-description"
+      >
+        <DialogTitle id="error-dialog-title">{'An Error Occurred'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="error-dialog-description">
+            Unfortunately, an error has occurred: {error.message} Please try
+            refreshing the page or contact support if the issue persists.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setPage((prev) => prev)} color="primary">
+            Retry
+          </Button>
+          <Button
+            onClick={() => window.location.reload()}
+            color="primary"
+            autoFocus
+          >
+            Refresh
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 
