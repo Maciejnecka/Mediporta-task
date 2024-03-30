@@ -23,10 +23,6 @@ export const StyledTagListContainer = styled.div`
     padding: 16px;
     font-size: 0.925rem;
   }
-  .MuiButton-root {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
   .MuiFormControl-root {
     margin-bottom: 20px;
   }

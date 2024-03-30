@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyledTagListContainer } from './TagList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags } from '../redux/tags/tagsSlice';
+import TagListItem from '../TagListItem';
+import Pagination from '../pagination';
+import LoadingIndicator from '../common/LoadingIndicator';
+import ErrorDialog from '../common/ErrorDialog';
 import {
   Table,
   TableBody,
@@ -11,15 +15,11 @@ import {
   TableRow,
   TableSortLabel,
   Paper,
-  Button,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
 } from '@mui/material';
-import TagListItem from '../TagListItem';
-import LoadingIndicator from '../common/LoadingIndicator';
-import ErrorDialog from '../common/ErrorDialog';
 
 const TagList = () => {
   const [page, setPage] = useState(1);
@@ -70,14 +70,6 @@ const TagList = () => {
   const handleSortFieldChange = (event) => {
     setSortField(event.target.value);
     setPage(1);
-  };
-
-  const handleNextPage = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   if (isLoading) return <LoadingIndicator />;
@@ -174,18 +166,7 @@ const TagList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <div
-        style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}
-      >
-        <Button
-          onClick={handlePrevPage}
-          disabled={page === 1}
-          style={{ marginRight: '10px' }}
-        >
-          Previous
-        </Button>
-        <Button onClick={handleNextPage}>Next</Button>
-      </div>
+      <Pagination page={page} onPageChange={setPage} />
     </StyledTagListContainer>
   );
 };
