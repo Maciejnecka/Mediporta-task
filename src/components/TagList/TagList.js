@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyledTagListContainer } from './TagList.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTags } from '../redux/tags/tagsSlice';
 import {
   Table,
   TableBody,
@@ -16,7 +18,6 @@ import {
   InputLabel,
 } from '@mui/material';
 import TagListItem from '../TagListItem';
-import useTags from '../../hooks/useTags';
 import LoadingIndicator from '../common/LoadingIndicator';
 import ErrorDialog from '../common/ErrorDialog';
 
@@ -26,11 +27,16 @@ const TagList = () => {
   const [sortField, setSortField] = useState('popular');
   const [sortOrder, setSortOrder] = useState('desc');
 
+  const dispatch = useDispatch();
   const {
     data: tagsData,
     isLoading,
     error,
-  } = useTags(page, pageSize, sortField, sortOrder);
+  } = useSelector((state) => state.tags);
+
+  useEffect(() => {
+    dispatch(fetchTags({ page, pageSize, sortField, sortOrder }));
+  }, [dispatch, page, pageSize, sortField, sortOrder]);
 
   const handlePageSizeChange = (event) => {
     setPageSize(event.target.value);
