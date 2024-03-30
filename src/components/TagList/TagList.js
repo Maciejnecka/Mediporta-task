@@ -7,6 +7,7 @@ import TagListPagination from '../TagListPagination';
 import TagFilterControls from '../TagFilterControls';
 import LoadingIndicator from '../common/LoadingIndicator';
 import ErrorDialog from '../common/ErrorDialog';
+import useSortAndFilter from '../hooks/useSortAndFilter';
 import {
   Table,
   TableBody,
@@ -21,8 +22,14 @@ import {
 const TagList = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(30);
-  const [sortField, setSortField] = useState('popular');
-  const [sortOrder, setSortOrder] = useState('desc');
+
+  const {
+    sortField,
+    sortOrder,
+    sortOrderOptions,
+    handleSortFieldChange,
+    handleSortOrderChange,
+  } = useSortAndFilter({ sortField: 'popular', sortOrder: 'desc' });
 
   const dispatch = useDispatch();
   const {
@@ -40,35 +47,6 @@ const TagList = () => {
     setPage(1);
   };
 
-  const handleSortOrderChange = (event) => {
-    setSortOrder(event.target.value);
-    setPage(1);
-  };
-
-  useEffect(() => {
-    if (sortField === 'name') {
-      setSortOrder('asc');
-    } else {
-      setSortOrder('desc');
-    }
-  }, [sortField]);
-
-  const sortOrderOptions =
-    sortField === 'popular'
-      ? [
-          { value: 'desc', label: 'Descending' },
-          { value: 'asc', label: 'Ascending' },
-        ]
-      : [
-          { value: 'asc', label: 'A - Z' },
-          { value: 'desc', label: 'Z - A' },
-        ];
-
-  const handleSortFieldChange = (event) => {
-    setSortField(event.target.value);
-    setPage(1);
-  };
-
   if (isLoading) return <LoadingIndicator />;
   if (error)
     return (
@@ -81,10 +59,10 @@ const TagList = () => {
         pageSize={pageSize}
         sortField={sortField}
         sortOrder={sortOrder}
+        sortOrderOptions={sortOrderOptions}
         onPageSizeChange={handlePageSizeChange}
         onSortFieldChange={handleSortFieldChange}
         onSortOrderChange={handleSortOrderChange}
-        sortOrderOptions={sortOrderOptions}
       />
       <TableContainer component={Paper}>
         <Table>
