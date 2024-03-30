@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyledTagListContainer } from './TagList.styled';
 import {
   Table,
@@ -43,6 +43,25 @@ const TagList = () => {
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
   };
+
+  useEffect(() => {
+    if (sortField === 'name') {
+      setSortOrder('asc');
+    } else {
+      setSortOrder('desc');
+    }
+  }, [sortField]);
+
+  const sortOrderOptions =
+    sortField === 'popular'
+      ? [
+          { value: 'desc', label: 'Descending' },
+          { value: 'asc', label: 'Ascending' },
+        ]
+      : [
+          { value: 'asc', label: 'A-Z' },
+          { value: 'desc', label: 'Z-A' },
+        ];
 
   const handleSortFieldChange = (event) => {
     setSortField(event.target.value);
@@ -105,7 +124,7 @@ const TagList = () => {
       <FormControl
         variant="outlined"
         size="small"
-        style={{ margin: '15px', minWidth: '90px' }}
+        style={{ margin: '10px', minWidth: '15%' }}
       >
         <InputLabel>Page Size</InputLabel>
         <Select
@@ -120,7 +139,11 @@ const TagList = () => {
           ))}
         </Select>
       </FormControl>
-      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+      <FormControl
+        variant="outlined"
+        size="small"
+        style={{ margin: '10px', minWidth: '15%' }}
+      >
         <InputLabel>Sort Field</InputLabel>
         <Select
           value={sortField}
@@ -131,15 +154,22 @@ const TagList = () => {
           <MenuItem value="name">Name</MenuItem>
         </Select>
       </FormControl>
-      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+      <FormControl
+        variant="outlined"
+        size="small"
+        style={{ margin: '10px', minWidth: '15%' }}
+      >
         <InputLabel>Sort Order</InputLabel>
         <Select
           value={sortOrder}
           onChange={handleSortOrderChange}
           label="Sort Order"
         >
-          <MenuItem value="desc">Descending</MenuItem>
-          <MenuItem value="asc">Ascending</MenuItem>
+          {sortOrderOptions.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <TableContainer component={Paper}>
