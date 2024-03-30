@@ -7,6 +7,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableSortLabel,
   Paper,
   Button,
   Select,
@@ -38,6 +39,7 @@ const TagList = () => {
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -55,12 +57,13 @@ const TagList = () => {
           { value: 'asc', label: 'Ascending' },
         ]
       : [
-          { value: 'asc', label: 'A-Z' },
-          { value: 'desc', label: 'Z-A' },
+          { value: 'asc', label: 'A - Z' },
+          { value: 'desc', label: 'Z - A' },
         ];
 
   const handleSortFieldChange = (event) => {
     setSortField(event.target.value);
+    setPage(1);
   };
 
   const handleNextPage = () => {
@@ -134,8 +137,28 @@ const TagList = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Tag Name</TableCell>
-              <TableCell align="right">Post Count</TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={sortField === 'name'}
+                  direction={
+                    sortField === 'name'
+                      ? sortOrder === 'asc'
+                        ? 'desc'
+                        : 'asc'
+                      : 'asc'
+                  }
+                >
+                  Tag Name
+                </TableSortLabel>
+              </TableCell>
+              <TableCell align="right">
+                <TableSortLabel
+                  active={sortField === 'popular'}
+                  direction={sortField === 'popular' ? sortOrder : 'desc'}
+                >
+                  Post Count
+                </TableSortLabel>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
