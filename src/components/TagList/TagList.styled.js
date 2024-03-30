@@ -23,9 +23,6 @@ export const StyledTagListContainer = styled.div`
     padding: 16px;
     font-size: 0.925rem;
   }
-  .MuiFormControl-root {
-    margin-bottom: 20px;
-  }
   .MuiTableBody-root .MuiTableRow-root:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.07);
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { StyledPagination } from './Pagination.styled';
+import { StyledPagination } from './TagListPagination.styled';
 
 const Pagination = ({ page, onPageChange }) => {
   const handlePrevPage = () => {
@@ -12,12 +12,8 @@ const Pagination = ({ page, onPageChange }) => {
   };
 
   return (
-    <StyledPagination style={{ display: 'flex', justifyContent: 'center' }}>
-      <Button
-        onClick={handlePrevPage}
-        disabled={page === 1}
-        style={{ marginRight: '10px' }}
-      >
+    <StyledPagination>
+      <Button onClick={handlePrevPage} disabled={page === 1}>
         Previous
       </Button>
       <Button onClick={handleNextPage}>Next</Button>
