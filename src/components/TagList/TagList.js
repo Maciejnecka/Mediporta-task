@@ -102,7 +102,11 @@ const TagList = () => {
 
   return (
     <StyledTagListContainer>
-      <FormControl variant="outlined" size="small" style={{ margin: '15px' }}>
+      <FormControl
+        variant="outlined"
+        size="small"
+        style={{ margin: '15px', minWidth: '90px' }}
+      >
         <InputLabel>Page Size</InputLabel>
         <Select
           value={pageSize}
@@ -116,18 +120,6 @@ const TagList = () => {
           ))}
         </Select>
       </FormControl>
-
-      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
-        <InputLabel>Sort Order</InputLabel>
-        <Select
-          value={sortOrder}
-          onChange={handleSortOrderChange}
-          label="Sort Order"
-        >
-          <MenuItem value="desc">Descending</MenuItem>
-          <MenuItem value="asc">Ascending</MenuItem>
-        </Select>
-      </FormControl>
       <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
         <InputLabel>Sort Field</InputLabel>
         <Select
@@ -137,6 +129,17 @@ const TagList = () => {
         >
           <MenuItem value="popular">Popularity</MenuItem>
           <MenuItem value="name">Name</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl variant="outlined" size="small" style={{ margin: '10px' }}>
+        <InputLabel>Sort Order</InputLabel>
+        <Select
+          value={sortOrder}
+          onChange={handleSortOrderChange}
+          label="Sort Order"
+        >
+          <MenuItem value="desc">Descending</MenuItem>
+          <MenuItem value="asc">Ascending</MenuItem>
         </Select>
       </FormControl>
       <TableContainer component={Paper}>
