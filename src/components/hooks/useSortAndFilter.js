@@ -21,14 +21,23 @@ function useSortAndFilter(
     }
   }, [sortField]);
 
-  const handleSortFieldChange = (event) => {
-    const newSortField = event.target.value;
-    setSortField(newSortField);
+  const handleSortFieldChange = (newSortFieldOrEvent) => {
+    const newSortField =
+      typeof newSortFieldOrEvent === 'string'
+        ? newSortFieldOrEvent
+        : newSortFieldOrEvent.target.value;
 
-    if (newSortField === 'name') {
-      setSortOrder('asc');
+    if (newSortField === sortField) {
+      setSortOrder((currentSortOrder) =>
+        currentSortOrder === 'asc' ? 'desc' : 'asc'
+      );
     } else {
-      setSortOrder('desc');
+      setSortField(newSortField);
+      if (newSortField === 'name') {
+        setSortOrder('asc');
+      } else {
+        setSortOrder('desc');
+      }
     }
     onSortChange();
   };
