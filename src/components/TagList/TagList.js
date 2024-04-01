@@ -3,22 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { StyledTagListContainer } from './TagList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags } from '../redux/tags/tagsSlice';
-import TagListItem from '../TagListItem';
 import Pagination from '../TagListPagination';
 import TagFilterControls from '../TagFilterControls';
 import LoadingIndicator from '../common/LoadingIndicator';
 import ErrorDialog from '../common/ErrorDialog';
 import useSortAndFilter from '../hooks/useSortAndFilter';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-  Paper,
-} from '@mui/material';
+import TagTable from '../TagTable';
 
 const TagList = () => {
   const { pageNumber } = useParams();
@@ -53,11 +43,6 @@ const TagList = () => {
     dispatch(fetchTags({ page, pageSize, sortField, sortOrder }));
   }, [dispatch, page, pageSize, sortField, sortOrder]);
 
-  const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-    setPage(1);
-  };
-
   useEffect(() => {
     const newPage = parseInt(pageNumber, 10);
     if (!isNaN(newPage) && newPage > 0) {
@@ -68,11 +53,10 @@ const TagList = () => {
     }
   }, [dispatch, pageNumber, pageSize, sortField, sortOrder]);
 
-  if (invalidPage) {
-    return (
-      <ErrorDialog error={'Page not found'} onClose={() => navigate('/')} />
-    );
-  }
+  const handlePageSizeChange = (event) => {
+    setPageSize(event.target.value);
+    setPage(1);
+  };
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -84,6 +68,11 @@ const TagList = () => {
     return (
       <ErrorDialog error={error} onClose={() => setPage((prev) => prev)} />
     );
+  if (invalidPage) {
+    return (
+      <ErrorDialog error={'Page not found'} onClose={() => navigate('/')} />
+    );
+  }
 
   return (
     <StyledTagListContainer>
@@ -96,41 +85,13 @@ const TagList = () => {
         onSortFieldChange={handleSortFieldChange}
         onSortOrderChange={handleSortOrderChange}
       />
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <TableSortLabel
-                  active={sortField === 'name'}
-                  direction={
-                    sortField === 'name'
-                      ? sortOrder === 'asc'
-                        ? 'desc'
-                        : 'asc'
-                      : 'asc'
-                  }
-                >
-                  Tag Name
-                </TableSortLabel>
-              </TableCell>
-              <TableCell align="right">
-                <TableSortLabel
-                  active={sortField === 'popular'}
-                  direction={sortField === 'popular' ? sortOrder : 'desc'}
-                >
-                  Post Count
-                </TableSortLabel>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {tagsData?.items.map((tag) => (
-              <TagListItem key={tag.name} tag={tag} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <TagTable
+        tagsData={tagsData}
+        sortField={sortField}
+        sortOrder={sortOrder}
+        onSortFieldChange={handleSortFieldChange}
+        onSortOrderChange={handleSortOrderChange}
+      />
       <Pagination page={page} onPageChange={handlePageChange} />
     </StyledTagListContainer>
   );
