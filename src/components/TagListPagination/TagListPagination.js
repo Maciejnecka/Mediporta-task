@@ -11,11 +11,33 @@ const Pagination = ({ page, onPageChange }) => {
     onPageChange(page + 1);
   };
 
+  const renderPageNumbers = () => {
+    const pages = [];
+
+    let startPage = page - 1;
+    startPage = startPage < 1 ? 1 : startPage;
+
+    for (let i = startPage; i <= startPage + 2; i++) {
+      pages.push(
+        <Button
+          className="page__button"
+          key={i}
+          onClick={() => onPageChange(i)}
+          disabled={page === i}
+        >
+          {i}
+        </Button>
+      );
+    }
+    return pages;
+  };
+
   return (
     <StyledPagination>
       <Button onClick={handlePrevPage} disabled={page === 1}>
         Previous
       </Button>
+      {renderPageNumbers()}
       <Button onClick={handleNextPage}>Next</Button>
     </StyledPagination>
   );

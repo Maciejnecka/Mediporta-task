@@ -12,4 +12,15 @@ export const StyledPagination = styled.div`
   .MuiButton-root:last-child {
     margin-right: 0;
   }
+  .page__button {
+    min-width: 34px;
+    &.Mui-disabled {
+      background-color: #007bff;
+      color: white;
+    }
+    &:not(.Mui-disabled):hover {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+  }
 `;

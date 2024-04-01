@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 
 function useSortAndFilter(
-  initialSettings = { sortField: 'popular', sortOrder: 'desc' }
+  initialSettings = { sortField: 'popular', sortOrder: 'desc' },
+  onSortChange
 ) {
   const [sortField, setSortField] = useState(initialSettings.sortField);
   const [sortOrder, setSortOrder] = useState(initialSettings.sortOrder);
@@ -29,10 +30,12 @@ function useSortAndFilter(
     } else {
       setSortOrder('desc');
     }
+    onSortChange();
   };
 
   const handleSortOrderChange = (event) => {
     setSortOrder(event.target.value);
+    onSortChange();
   };
 
   return {

@@ -23,13 +23,15 @@ const TagList = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(30);
 
+  const resetPage = () => setPage(1);
+
   const {
     sortField,
     sortOrder,
     sortOrderOptions,
     handleSortFieldChange,
     handleSortOrderChange,
-  } = useSortAndFilter({ sortField: 'popular', sortOrder: 'desc' });
+  } = useSortAndFilter({ sortField: 'popular', sortOrder: 'desc' }, resetPage);
 
   const dispatch = useDispatch();
   const {
