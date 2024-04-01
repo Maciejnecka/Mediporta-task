@@ -61,14 +61,12 @@ const TagList = () => {
   useEffect(() => {
     const newPage = parseInt(pageNumber, 10);
     if (!isNaN(newPage) && newPage > 0) {
-      if (newPage !== page) {
-        setPage(newPage);
-        setInvalidPage(false);
-      }
+      dispatch(fetchTags({ page: newPage, pageSize, sortField, sortOrder }));
+      setInvalidPage(false);
     } else {
       setInvalidPage(true);
     }
-  }, [pageNumber, page]);
+  }, [dispatch, pageNumber, pageSize, sortField, sortOrder]);
 
   if (invalidPage) {
     return (
