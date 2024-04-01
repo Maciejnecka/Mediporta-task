@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { StyledTagListContainer } from './TagList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags } from '../redux/tags/tagsSlice';
@@ -20,10 +21,18 @@ import {
 } from '@mui/material';
 
 const TagList = () => {
+  const { pageNumber } = useParams();
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(30);
+  const [invalidPage, setInvalidPage] = useState(false);
 
-  const resetPage = () => setPage(1);
+  const resetPage = () => {
+    setPage(1);
+    if (pageNumber !== '1') {
+      navigate(`/page/1`);
+    }
+  };
 
   const {
     sortField,
@@ -47,6 +56,29 @@ const TagList = () => {
   const handlePageSizeChange = (event) => {
     setPageSize(event.target.value);
     setPage(1);
+  };
+
+  useEffect(() => {
+    const newPage = parseInt(pageNumber, 10);
+    if (!isNaN(newPage) && newPage > 0) {
+      if (newPage !== page) {
+        setPage(newPage);
+        setInvalidPage(false);
+      }
+    } else {
+      setInvalidPage(true);
+    }
+  }, [pageNumber, page]);
+
+  if (invalidPage) {
+    return (
+      <ErrorDialog error={'Page not found'} onClose={() => navigate('/')} />
+    );
+  }
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    navigate(`/page/${newPage}`);
   };
 
   if (isLoading) return <LoadingIndicator />;
@@ -101,7 +133,7 @@ const TagList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TagListPagination page={page} onPageChange={setPage} />
+      <TagListPagination page={page} onPageChange={handlePageChange} />
     </StyledTagListContainer>
   );
 };
