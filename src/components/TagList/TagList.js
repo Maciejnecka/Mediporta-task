@@ -4,7 +4,7 @@ import { StyledTagListContainer } from './TagList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags } from '../redux/tags/tagsSlice';
 import TagListItem from '../TagListItem';
-import TagListPagination from '../TagListPagination';
+import Pagination from '../TagListPagination';
 import TagFilterControls from '../TagFilterControls';
 import LoadingIndicator from '../common/LoadingIndicator';
 import ErrorDialog from '../common/ErrorDialog';
@@ -131,7 +131,7 @@ const TagList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TagListPagination page={page} onPageChange={handlePageChange} />
+      <Pagination page={page} onPageChange={handlePageChange} />
     </StyledTagListContainer>
   );
 };

@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { StyledPagination } from './TagListPagination.styled';
 
-const Pagination = ({ page, onPageChange }) => {
+const Pagination = () => {
+  const { pageNumber } = useParams();
+  const navigate = useNavigate();
+  const initialPage = parseInt(pageNumber, 10) || 1;
+  const [page, setPage] = useState(initialPage);
+
+  useEffect(() => {
+    const newPage = parseInt(pageNumber, 10) || 1;
+    if (page !== newPage) {
+      setPage(newPage);
+    }
+  }, [pageNumber, page]);
+
+  const onPageChange = (newPage) => {
+    navigate(`/page/${newPage}`);
+  };
+
   const handlePrevPage = () => {
     onPageChange(Math.max(page - 1, 1));
   };

@@ -1,3 +1,3 @@
-import TagListPagination from './TagListPagination.js';
+import Pagination from './TagListPagination.js';
 
-export default TagListPagination;
+export default Pagination;
