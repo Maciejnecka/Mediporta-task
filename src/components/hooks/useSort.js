@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 
-function useSortAndFilter(
+function useSort(
   initialSettings = { sortField: 'popular', sortOrder: 'desc' },
   onSortChange
 ) {
@@ -56,4 +56,4 @@ function useSortAndFilter(
   };
 }
 
-export default useSortAndFilter;
+export default useSort;

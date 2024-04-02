@@ -7,7 +7,7 @@ import Pagination from '../TagListPagination';
 import TagFilterControls from '../TagFilterControls';
 import LoadingIndicator from '../common/LoadingIndicator';
 import ErrorDialog from '../common/ErrorDialog';
-import useSortAndFilter from '../hooks/useSortAndFilter';
+import useSort from '../hooks/useSort';
 import TagTable from '../TagTable';
 
 const TagList = () => {
@@ -30,7 +30,7 @@ const TagList = () => {
     sortOrderOptions,
     handleSortFieldChange,
     handleSortOrderChange,
-  } = useSortAndFilter({ sortField: 'popular', sortOrder: 'desc' }, resetPage);
+  } = useSort({ sortField: 'popular', sortOrder: 'desc' }, resetPage);
 
   const dispatch = useDispatch();
   const {
