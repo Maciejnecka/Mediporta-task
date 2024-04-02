@@ -54,8 +54,28 @@ const TagList = () => {
   }, [dispatch, pageNumber, pageSize, sortField, sortOrder]);
 
   const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
+    const TOTAL_ITEMS = 65730;
+    const newPageSize = event.target.value;
     setPage(1);
+    navigate(`/page/1`);
+
+    const newTotalPages = Math.ceil(TOTAL_ITEMS / newPageSize);
+    setPageSize(newPageSize);
+
+    const newPage = Math.min(page, newTotalPages);
+    if (page !== newPage) {
+      setPage(newPage);
+      navigate(`/page/${newPage}`);
+    } else {
+      dispatch(
+        fetchTags({
+          page: newPage,
+          pageSize: newPageSize,
+          sortField,
+          sortOrder,
+        })
+      );
+    }
   };
 
   const handlePageChange = (newPage) => {
@@ -92,7 +112,12 @@ const TagList = () => {
         onSortFieldChange={handleSortFieldChange}
         onSortOrderChange={handleSortOrderChange}
       />
-      <Pagination page={page} onPageChange={handlePageChange} />
+      <Pagination
+        page={page}
+        onPageChange={handlePageChange}
+        totalItems={65730}
+        pageSize={pageSize}
+      />
     </StyledTagListContainer>
   );
 };
