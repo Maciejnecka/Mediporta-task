@@ -1,40 +1,41 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { StyledPagination } from '../components/TagListPagination/TagListPagination.styled';
-import Pagination from '../components/TagListPagination/TagListPagination';
+import Pagination from '../components/TagListPagination';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 
 export default {
-  title: 'Components/Pagination',
+  title: 'Components/TagListPagination',
   component: Pagination,
   decorators: [
     (Story) => (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Story />
-      </div>
+      <MemoryRouter initialEntries={['/page/1']}>
+        <Routes>
+          <Route path="/page/:pageNumber" element={<Story />} />
+        </Routes>
+      </MemoryRouter>
     ),
   ],
+  argTypes: {
+    totalItems: { control: 'number' },
+    pageSize: { control: 'number' },
+  },
 };
 
 const Template = (args) => <Pagination {...args} />;
 
-export const FirstPage = Template.bind({});
-FirstPage.args = {
-  page: 1,
-  onPageChange: action('page changed'),
+export const Default = Template.bind({});
+Default.args = {
+  totalItems: 50,
+  pageSize: 10,
 };
 
-export const MiddlePage = Template.bind({});
-MiddlePage.args = {
-  page: 5,
-  onPageChange: action('page changed'),
+export const ManyPages = Template.bind({});
+ManyPages.args = {
+  totalItems: 1000,
+  pageSize: 10,
 };
 
-export const WithCustomStyling = (args) => (
-  <StyledPagination>
-    <Pagination {...args} />
-  </StyledPagination>
-);
-WithCustomStyling.args = {
-  page: 3,
-  onPageChange: action('page changed'),
+export const FewPages = Template.bind({});
+FewPages.args = {
+  totalItems: 30,
+  pageSize: 10,
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Table, TableBody } from '@mui/material';
 import TagListItem from '../components/TagListItem';
+import { Table, TableBody } from '@mui/material';
 
 export default {
   title: 'Components/TagListItem',
@@ -20,15 +20,21 @@ const Template = (args) => <TagListItem {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  tag: { name: 'Example Tag', count: 10 },
+  tag: { name: 'React', count: 123 },
 };
 
-export const HighCount = Template.bind({});
-HighCount.args = {
-  tag: { name: 'High Count Tag', count: 1000 },
-};
+export const MultipleTags = (args) => (
+  <>
+    {args.tags.map((tag, index) => (
+      <Template key={index} tag={tag} />
+    ))}
+  </>
+);
 
-export const ZeroCount = Template.bind({});
-ZeroCount.args = {
-  tag: { name: 'Zero Count', count: 0 },
+MultipleTags.args = {
+  tags: [
+    { name: 'React', count: 123 },
+    { name: 'Storybook', count: 456 },
+    { name: 'JavaScript', count: 789 },
+  ],
 };
