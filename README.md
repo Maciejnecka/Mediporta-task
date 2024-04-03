@@ -7,7 +7,7 @@ Welcome to TagList, an application designed to provide a seamless experience for
 
 
 
-## 💡 Technologies i have used
+## 💡 Technologies I Have Used
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
@@ -22,7 +22,7 @@ Welcome to TagList, an application designed to provide a seamless experience for
 ## 📚 Application Overview
 TagList provides a comprehensive solution for managing API items. Here are some key features:
 
-- Sorting: Sort API items based on criteria such as name or popularity.
+- Sorting: Sort API tags based on criteria such as name or popularity.
 - Pagination: Navigate through a large collection of API tags with ease using pagination controls.
 - Customization: Tailor your viewing experience by adjusting page size, sort order, and other preferences.
 - TagList offers a user-friendly interface and robust functionality to streamline your API management tasks.
@@ -56,7 +56,7 @@ To set up the TagList locally:
 Now, you're ready to explore and modify the TagList.
 
 ## 🙋‍♂️ Connect With Me
-Hope you enjoy using TagList! Feel free to connect with me for any questions or feedback.
+I hope you enjoy using TagList! Feel free to connect with me for any questions or feedback.
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maciek-n%C4%99cka/)</br>
 
