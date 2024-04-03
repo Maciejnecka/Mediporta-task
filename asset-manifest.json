@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/Mediporta-task/static/js/main.e487b10a.js",
+    "static/js/453.3dd0ad3b.chunk.js": "/Mediporta-task/static/js/453.3dd0ad3b.chunk.js",
+    "index.html": "/Mediporta-task/index.html",
+    "main.e487b10a.js.map": "/Mediporta-task/static/js/main.e487b10a.js.map",
+    "453.3dd0ad3b.chunk.js.map": "/Mediporta-task/static/js/453.3dd0ad3b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.e487b10a.js"
+  ]
+}
