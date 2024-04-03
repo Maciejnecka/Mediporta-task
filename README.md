@@ -30,31 +30,30 @@ TagList provides a comprehensive solution for managing API items. Here are some 
 
 ## 💿 Installation Guide
 
-To set up the portfolio website locally:
+To set up the TagList locally:
 
-1. **Fork** this repository (button on the top right corner) to add a copy to your GitHub account.
-2. **Clone** your forked repository to your local machine:
+1. **Clone** repository to your local machine:
     ```bash
     git clone https://github.com/<YourGitHubUsername>/<RepositoryName>.git
     ```
-3. **Navigate** to the project directory:
+2. **Navigate** to the project directory:
     ```bash
     cd <RepositoryName>
     ```
-4. **Install** dependencies:
+3. **Install** dependencies:
     ```bash
     npm ci
     ```
-5. **Launch** the application:
+4. **Launch** the application:
     ```bash
     npm start
     ```
-6. **Launch** the Storybook:
+5. **Launch** the Storybook:
     ```bash
     npm run storybook
     ```
 
-Now, you're ready to explore and modify the portfolio site in your own repository.
+Now, you're ready to explore and modify the TagList.
 
 ## 🙋‍♂️ Connect With Me
 Hope you enjoy using TagList! Feel free to connect with me for any questions or feedback.
