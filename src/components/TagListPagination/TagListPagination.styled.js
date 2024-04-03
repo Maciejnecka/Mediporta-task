@@ -14,13 +14,17 @@ export const StyledPagination = styled.div`
   }
   .page__button {
     min-width: 34px;
-    &.Mui-disabled {
-      background-color: #007bff;
-      color: white;
+    @media (max-width: 768px) {
+      min-width: 16px;
     }
     &:not(.Mui-disabled):hover {
       background-color: #e0e0e0;
       color: #333;
     }
+  }
+
+  .page__button--dots {
+    color: #007bff;
+    min-width: 0;
   }
 `;

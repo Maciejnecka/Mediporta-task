@@ -54,7 +54,7 @@ const TagList = () => {
   }, [dispatch, pageNumber, pageSize, sortField, sortOrder]);
 
   const handlePageSizeChange = (event) => {
-    const TOTAL_ITEMS = 65730;
+    const TOTAL_ITEMS = 65717;
     const newPageSize = event.target.value;
     setPage(1);
     navigate(`/page/1`);
@@ -115,7 +115,7 @@ const TagList = () => {
       <Pagination
         page={page}
         onPageChange={handlePageChange}
-        totalItems={65730}
+        totalItems={65717}
         pageSize={pageSize}
       />
     </StyledTagListContainer>

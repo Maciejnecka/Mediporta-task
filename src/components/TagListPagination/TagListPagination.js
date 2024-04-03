@@ -49,6 +49,7 @@ const Pagination = ({ totalItems, pageSize }) => {
     for (let i = startPage; i <= endPage; i++) {
       pages.push(
         <Button
+          className="page__button"
           key={i}
           onClick={() => onPageChange(i)}
           disabled={page === i}
@@ -61,10 +62,16 @@ const Pagination = ({ totalItems, pageSize }) => {
 
     if (endPage < totalPages) {
       pages.push(
-        <Button key="ellipsis" disabled sx={{ mx: 0 }}>
-          . . .
+        <Button
+          className="page__button--dots"
+          key="ellipsis"
+          disabled
+          sx={{ mx: 0 }}
+        >
+          ...
         </Button>,
         <Button
+          className="page__button"
           key={totalPages}
           onClick={() => onPageChange(totalPages)}
           disabled={page === totalPages}
