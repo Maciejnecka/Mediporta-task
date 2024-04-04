@@ -20,7 +20,7 @@ Welcome to TagList, an application designed to provide a seamless experience for
 ![API](https://img.shields.io/badge/API-stackexchange.com-blue.svg?style=for-the-badge&logo=api&logoColor=white)
 
 ## 📚 Application Overview
-TagList provides a comprehensive solution for managing API items. Here are some key features:
+TagList provides a comprehensive solution for managing API tags. Here are some key features:
 
 - Sorting: Sort API tags based on criteria such as name or popularity.
 - Pagination: Navigate through a large collection of API tags with ease using pagination controls.
